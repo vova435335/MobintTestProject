@@ -4,21 +4,24 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import dev.vladimir.mobinttestproject.data.BASE_URL
-import dev.vladimir.mobinttestproject.di.scopes.ApplicationScope
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+@InstallIn(SingletonComponent::class)
+class DataModule {
 
-    @ApplicationScope
+    @Singleton
     @Provides
     fun provideGson(): Gson = GsonBuilder()
         .setLenient()
         .create()
 
-    @ApplicationScope
+    @Singleton
     @Provides
     fun provideRetrofit(gson: Gson): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

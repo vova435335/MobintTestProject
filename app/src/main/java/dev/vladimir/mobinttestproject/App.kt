@@ -1,11 +1,7 @@
 package dev.vladimir.mobinttestproject
 
 import android.app.Application
-import dev.vladimir.mobinttestproject.di.DaggerApplicationComponent
+import dagger.hilt.android.HiltAndroidApp
 
-class App : Application() {
-
-    val appComponent by lazy {
-        DaggerApplicationComponent.builder().build()
-    }
-}
+@HiltAndroidApp
+class App : Application()
