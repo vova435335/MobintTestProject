@@ -2,6 +2,7 @@ package dev.vladimir.mobinttestproject.data
 
 import dev.vladimir.mobinttestproject.data.request.AllCompaniesRequestModel
 import dev.vladimir.mobinttestproject.data.response.all_companies.CompanyResponseModel
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -9,6 +10,6 @@ interface CardsApi {
 
     @POST("mobileapp/getAllCompanies")
     suspend fun getAllCompanies(
-        @Body body: AllCompaniesRequestModel
-    ): List<CompanyResponseModel>
+        @Body body: AllCompaniesRequestModel,
+    ): Response<List<CompanyResponseModel>>
 }

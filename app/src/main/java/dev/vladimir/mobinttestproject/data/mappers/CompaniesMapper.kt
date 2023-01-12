@@ -3,8 +3,9 @@ package dev.vladimir.mobinttestproject.data.mappers
 import android.graphics.Color
 import dev.vladimir.mobinttestproject.data.response.all_companies.CompanyResponseModel
 import dev.vladimir.mobinttestproject.domain.models.Company
+import javax.inject.Inject
 
-class CompaniesMapper {
+class CompaniesMapper @Inject constructor() {
 
     fun mapCompanies(companiesResponse: List<CompanyResponseModel>): List<Company> =
         companiesResponse.map(::mapCompany)
