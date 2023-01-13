@@ -20,5 +20,6 @@ class DefaultLoadStateAdapter : LoadStateAdapter<DefaultLoadStateAdapter.Holder>
         return Holder(binding)
     }
 
-    inner class Holder(internal val binding: ViewLoaderBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class Holder(internal val binding: ViewLoaderBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

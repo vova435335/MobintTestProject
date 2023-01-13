@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="company"
             type="dev.vladimir.mobinttestproject.domain.models.Company" />
@@ -96,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin2"
-                android:text="@{Integer.toString(company.cashback)}"
+                android:text="@{Integer.toString(company.cashback) + ` %`}"
                 android:textColor="@{company.highlightTextColor}"
                 android:textSize="@dimen/text3"
                 app:layout_constraintStart_toStartOf="@+id/card_company_name_tv"
