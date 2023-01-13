@@ -1,4 +1,4 @@
-package dev.vladimir.mobinttestproject.data
+package dev.vladimir.mobinttestproject.data.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response

@@ -1,12 +1,13 @@
 package dev.vladimir.mobinttestproject.domain
 
-import dev.vladimir.mobinttestproject.data.CardsRepository
-import dev.vladimir.mobinttestproject.data.models.Result
+import androidx.paging.PagingData
 import dev.vladimir.mobinttestproject.domain.models.Company
+import dev.vladimir.mobinttestproject.domain.repository.CardsRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CardsInteractor @Inject constructor(private val cardsRepository: CardsRepository) {
 
-    suspend fun getAllCompanies(offset: Int): Result<List<Company>> =
-        cardsRepository.getAllCompanies(offset)
+    fun getAllCompanies(): Flow<PagingData<Company>> =
+        cardsRepository.getPagingAllCompanies()
 }
