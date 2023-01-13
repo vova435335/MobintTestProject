@@ -2,9 +2,12 @@ package dev.vladimir.mobinttestproject.presentation.cards
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import dev.vladimir.mobinttestproject.databinding.ItemCardBinding
 import dev.vladimir.mobinttestproject.domain.models.Company
 
@@ -21,6 +24,17 @@ class CardsAdapter : PagingDataAdapter<Company, CardsAdapter.Holder>(CardsDiffUt
     }
 
     inner class Holder(val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root)
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("logoImage")
+        fun loadImage(view: ImageView, logoUrl: String) {
+            Glide.with(view.context)
+                .load(logoUrl)
+                .circleCrop()
+                .into(view)
+        }
+    }
 }
 
 class CardsDiffUtilCallback : DiffUtil.ItemCallback<Company>() {
