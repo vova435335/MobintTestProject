@@ -5,4 +5,5 @@
     <string name="cashback_title">Кешбэк</string>
     <string name="level_title">Уровень</string>
     <string name="more_text_button">Подробнее</string>
+    <string name="load_companies_text">Подгрузка компаний</string>
 </resources>

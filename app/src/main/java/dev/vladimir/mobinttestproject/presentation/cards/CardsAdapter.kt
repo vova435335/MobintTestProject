@@ -23,7 +23,7 @@ class CardsAdapter : PagingDataAdapter<Company, CardsAdapter.Holder>(CardsDiffUt
         return Holder(binding)
     }
 
-    inner class Holder(val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class Holder(internal val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root)
 
     companion object {
         @JvmStatic

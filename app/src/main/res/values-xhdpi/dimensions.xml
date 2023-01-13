@@ -10,4 +10,5 @@
     <dimen name="margin3">48dp</dimen>
     <dimen name="logoSize">40dp</dimen>
     <dimen name="iconSize">20dp</dimen>
+    <dimen name="sizePreloader">40dp</dimen>
 </resources>
