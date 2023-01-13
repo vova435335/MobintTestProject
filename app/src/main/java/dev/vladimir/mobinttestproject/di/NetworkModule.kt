@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.vladimir.mobinttestproject.data.BASE_URL
+import dev.vladimir.mobinttestproject.data.common.BASE_URL
 import dev.vladimir.mobinttestproject.data.CardsApi
 import dev.vladimir.mobinttestproject.data.interceptor.TokenInterceptor
 import okhttp3.OkHttpClient
