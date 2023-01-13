@@ -16,14 +16,14 @@ class CompaniesMapper @Inject constructor() {
                 id = company.companyId,
                 companyName = mobileAppDashboard.companyName,
                 logoUrl = mobileAppDashboard.logo,
-                backgroundColor = Color.parseColor(mobileAppDashboard.cardBackgroundColor),
+                backgroundColor = Color.parseColor(mobileAppDashboard.backgroundColor),
                 mainColor = Color.parseColor(mobileAppDashboard.mainColor),
                 cardBackgroundColor = Color.parseColor(mobileAppDashboard.cardBackgroundColor),
                 textColor = Color.parseColor(mobileAppDashboard.textColor),
                 highlightTextColor = Color.parseColor(mobileAppDashboard.highlightTextColor),
                 accentColor = Color.parseColor(mobileAppDashboard.accentColor),
                 mark = customerMarkParameters.mark,
-                markToCash = customerMarkParameters.loyaltyLevel.markToCash,
+                cashback = customerMarkParameters.loyaltyLevel.cashToMark,
                 levelName = customerMarkParameters.loyaltyLevel.name
             )
         }

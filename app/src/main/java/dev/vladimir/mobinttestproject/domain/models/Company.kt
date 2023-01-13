@@ -11,6 +11,6 @@ data class Company(
     val highlightTextColor: Int,
     val accentColor: Int,
     val mark: Int,
-    val markToCash: Int,
+    val cashback: Int,
     val levelName: String
 )
