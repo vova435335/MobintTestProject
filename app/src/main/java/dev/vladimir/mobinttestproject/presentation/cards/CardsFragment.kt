@@ -1,5 +1,6 @@
 package dev.vladimir.mobinttestproject.presentation.cards
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -32,7 +33,11 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
     }
 
     private fun initRecycler() {
-        cardsAdapter = CardsAdapter()
+        cardsAdapter = CardsAdapter(
+            onEyeClick = { showCompanyInfo(getString(R.string.eye_button_name), it) },
+            onTrashClick = { showCompanyInfo(getString(R.string.trash_button_name), it) },
+            onMoreClick = { showCompanyInfo(getString(R.string.more_button_name), it) }
+        )
 
         val footerAdapter = DefaultLoadStateAdapter()
 
@@ -50,10 +55,16 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         }
     }
 
-
     private fun observeViewModel() {
         viewModel.companiesState.observe(this) {
             cardsAdapter.submitData(lifecycle, it)
         }
+    }
+
+    private fun showCompanyInfo(buttonName: String, companyId: String) {
+        AlertDialog.Builder(requireContext())
+            .setMessage(getString(R.string.company_info_dialog_message, buttonName, companyId))
+            .setPositiveButton(R.string.company_info_dialog_close_text, null)
+            .show()
     }
 }

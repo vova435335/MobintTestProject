@@ -11,10 +11,23 @@ import com.bumptech.glide.Glide
 import dev.vladimir.mobinttestproject.databinding.ItemCardBinding
 import dev.vladimir.mobinttestproject.domain.models.Company
 
-class CardsAdapter : PagingDataAdapter<Company, CardsAdapter.Holder>(CardsDiffUtilCallback()) {
+class CardsAdapter(
+    private val onEyeClick: (companyId: String) -> Unit,
+    private val onTrashClick: (companyId: String) -> Unit,
+    private val onMoreClick: (companyId: String) -> Unit,
+) : PagingDataAdapter<Company, CardsAdapter.Holder>(CardsDiffUtilCallback()) {
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.binding.company = getItem(position) ?: return
+        val company = getItem(position) ?: return
+        val companyId = company.id
+
+        with(holder.binding) {
+            this.company = company
+
+            cardCompanyEyeIv.setOnClickListener { onEyeClick(companyId) }
+            cardCompanyTrashIv.setOnClickListener { onTrashClick(companyId) }
+            cardCompanyMoreButton.setOnClickListener { onMoreClick(companyId) }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
