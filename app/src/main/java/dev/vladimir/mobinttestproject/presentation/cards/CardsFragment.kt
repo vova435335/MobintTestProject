@@ -2,9 +2,10 @@ package dev.vladimir.mobinttestproject.presentation.cards
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,21 +14,23 @@ import dev.vladimir.mobinttestproject.R
 import dev.vladimir.mobinttestproject.data.common.extensions.observe
 import dev.vladimir.mobinttestproject.databinding.FragmentCardsBinding
 import dev.vladimir.mobinttestproject.presentation.adapters.DefaultLoadStateAdapter
+import dev.vladimir.mobinttestproject.presentation.base.BaseFragment
 
 @AndroidEntryPoint
-class CardsFragment : Fragment(R.layout.fragment_cards) {
+class CardsFragment : BaseFragment<FragmentCardsBinding>() {
 
     private val viewModel by viewModels<CardsViewModel>()
-
-    private lateinit var binding: FragmentCardsBinding
 
     private lateinit var cardsAdapter: CardsAdapter
     private lateinit var cardsFooterAdapter: DefaultLoadStateAdapter
 
+    override fun createBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+    ): FragmentCardsBinding = FragmentCardsBinding.inflate(inflater, container, false)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding = FragmentCardsBinding.bind(view)
 
         initRecycler()
         observeViewModel()
@@ -47,10 +50,10 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
             adapter = cardsAdapter.withLoadStateFooter(cardsFooterAdapter)
         }
 
-        listenLoadState()
+        observeLoadState()
     }
 
-    private fun listenLoadState() {
+    private fun observeLoadState() {
         cardsAdapter.loadStateFlow.observe(this){
             with(binding) {
                 when (it.refresh) {
