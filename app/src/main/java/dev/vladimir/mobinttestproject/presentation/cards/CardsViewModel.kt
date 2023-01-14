@@ -1,5 +1,6 @@
 package dev.vladimir.mobinttestproject.presentation.cards
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -17,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CardsViewModel @Inject constructor(
     private val cardsInteractor: CardsInteractor,
-    private val stringProvider: StringProvider
+    private val stringProvider: StringProvider,
 ) : ViewModel() {
 
     private val mutableCompaniesState =
@@ -27,14 +28,17 @@ class CardsViewModel @Inject constructor(
     private val mutableErrorEvent = MutableSharedFlow<String>()
     val errorEvent: SharedFlow<String> = mutableErrorEvent
 
+    private val mutableShowCompanyInfoEvent = MutableSharedFlow<String>()
+    val showCompanyInfoEvent: SharedFlow<String> = mutableShowCompanyInfoEvent
+
     init {
         loadCompanies()
     }
 
     fun handleError(throwable: Throwable) {
         viewModelScope.launch {
-            if(throwable is HttpException) {
-                when(throwable.code()) {
+            if (throwable is HttpException) {
+                when (throwable.code()) {
                     CardsErrors.ERROR_400.code -> {
                         mutableErrorEvent.emit(throwable.message())
                     }
@@ -46,6 +50,18 @@ class CardsViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun showCompanyInfo(@StringRes buttonNameRes: Int, companyId: String) {
+        viewModelScope.launch {
+            mutableShowCompanyInfoEvent.emit(
+                stringProvider.getString(
+                    R.string.company_info_dialog_message,
+                    stringProvider.getString(buttonNameRes),
+                    companyId
+                )
+            )
         }
     }
 

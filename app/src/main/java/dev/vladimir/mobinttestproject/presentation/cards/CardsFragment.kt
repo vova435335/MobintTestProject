@@ -35,9 +35,9 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
 
     private fun initRecycler() {
         cardsAdapter = CardsAdapter(
-            onEyeClick = { showCompanyInfo(getString(R.string.eye_button_name), it) },
-            onTrashClick = { showCompanyInfo(getString(R.string.trash_button_name), it) },
-            onMoreClick = { showCompanyInfo(getString(R.string.more_button_name), it) }
+            onEyeClick = { viewModel.showCompanyInfo(R.string.eye_button_name, it) },
+            onTrashClick = { viewModel.showCompanyInfo(R.string.trash_button_name, it) },
+            onMoreClick = { viewModel.showCompanyInfo(R.string.more_button_name, it) },
         )
 
         cardsFooterAdapter = DefaultLoadStateAdapter(viewModel::handleError)
@@ -76,11 +76,14 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         viewModel.errorEvent.observe(this) {
             showErrorDialog(it)
         }
+        viewModel.showCompanyInfoEvent.observe(this) {
+            showCompanyInfo(it)
+        }
     }
 
-    private fun showCompanyInfo(buttonName: String, companyId: String) {
+    private fun showCompanyInfo(message: String) {
         AlertDialog.Builder(requireContext())
-            .setMessage(getString(R.string.company_info_dialog_message, buttonName, companyId))
+            .setMessage(message)
             .setPositiveButton(R.string.company_info_dialog_close_text, null)
             .show()
     }

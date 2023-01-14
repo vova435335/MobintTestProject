@@ -14,7 +14,6 @@ class CardsRepository @Inject constructor(
     private val companiesMapper: CompaniesMapper,
 ) : ICardsRepository {
 
-
     override suspend fun getAllCompanies(offset: Int): List<Company> =
         withContext(Dispatchers.IO) {
             companiesMapper.mapCompanies(
