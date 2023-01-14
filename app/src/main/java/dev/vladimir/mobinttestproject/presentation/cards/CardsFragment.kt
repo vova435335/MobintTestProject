@@ -43,7 +43,9 @@ class CardsFragment : BaseFragment<FragmentCardsBinding>() {
             onMoreClick = { viewModel.showCompanyInfo(R.string.more_button_name, it) },
         )
 
-        cardsFooterAdapter = DefaultLoadStateAdapter(viewModel::handleError)
+        cardsFooterAdapter = DefaultLoadStateAdapter {
+            viewModel.handleError(it)
+        }
 
         binding.cardsRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -54,7 +56,7 @@ class CardsFragment : BaseFragment<FragmentCardsBinding>() {
     }
 
     private fun observeLoadState() {
-        cardsAdapter.loadStateFlow.observe(this){
+        cardsAdapter.loadStateFlow.observe(this) {
             with(binding) {
                 when (it.refresh) {
                     is LoadState.Loading -> {
@@ -94,8 +96,11 @@ class CardsFragment : BaseFragment<FragmentCardsBinding>() {
     private fun showErrorDialog(message: String) {
         AlertDialog.Builder(requireContext())
             .setMessage(message)
-            .setPositiveButton(R.string.company_info_dialog_close_text, null)
-            .setOnDismissListener { cardsAdapter.retry() }
+            .setCancelable(false)
+            .setNegativeButton(R.string.company_info_dialog_close_text, null)
+            .setPositiveButton(R.string.company_info_dialog_retry_text) { _, _ ->
+                cardsAdapter.retry()
+            }
             .show()
     }
 }
