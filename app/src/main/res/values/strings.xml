@@ -16,4 +16,6 @@
 
     <string name="error_message_401">ошибка авторизации</string>
     <string name="error_message_500">все упало</string>
+
+    <string name="card_management_toolbar_title">Управление картами</string>
 </resources>
