@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="company"
+            type="dev.vladimir.mobinttestproject.domain.models.Company" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin1"
+        app:cardCornerRadius="@dimen/margin1"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@{company.cardBackgroundColor}">
+
+            <TextView
+                android:id="@+id/card_company_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin1"
+                android:text="@{company.companyName}"
+                android:textColor="@{company.highlightTextColor}"
+                android:textSize="@dimen/text1"
+                app:layout_constraintBottom_toBottomOf="@+id/card_company_logo_iv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/card_company_logo_iv"
+                tools:text="Bonus Money"
+                tools:textColor="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/card_company_logo_iv"
+                android:layout_width="@dimen/logoSize"
+                android:layout_height="@dimen/logoSize"
+                android:layout_marginTop="@dimen/margin1"
+                android:layout_marginEnd="@dimen/margin1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:logoImage="@{company.logoUrl}"
+                tools:src="@tools:sample/avatars" />
+
+            <View
+                android:id="@+id/card_top_separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="@dimen/margin1"
+                android:layout_marginTop="@dimen/margin2"
+                android:background="@color/lightGray"
+                app:layout_constraintTop_toBottomOf="@+id/card_company_logo_iv" />
+
+            <TextView
+                android:id="@+id/card_company_mark_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin1"
+                android:text="@{Integer.toString(company.mark)}"
+                android:textColor="@{company.highlightTextColor}"
+                android:textSize="@dimen/text0"
+                app:layout_constraintStart_toStartOf="@+id/card_company_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/card_top_separator"
+                tools:text="200"
+                tools:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/card_company_mark_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin2"
+                android:text="@string/mark_title"
+                android:textColor="@{company.textColor}"
+                android:textSize="@dimen/text2"
+                app:layout_constraintBottom_toBottomOf="@+id/card_company_mark_value_tv"
+                app:layout_constraintStart_toEndOf="@+id/card_company_mark_value_tv" />
+
+            <TextView
+                android:id="@+id/card_company_cashback_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin1"
+                android:text="@string/cashback_title"
+                android:textColor="@{company.textColor}"
+                android:textSize="@dimen/text4"
+                app:layout_constraintStart_toStartOf="@+id/card_company_mark_value_tv"
+                app:layout_constraintTop_toBottomOf="@+id/card_company_mark_value_tv" />
+
+            <TextView
+                android:id="@+id/card_company_cashback_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin2"
+                android:text="@{Integer.toString(company.cashback) + ` %`}"
+                android:textColor="@{company.highlightTextColor}"
+                android:textSize="@dimen/text3"
+                app:layout_constraintStart_toStartOf="@+id/card_company_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/card_company_cashback_title_tv"
+                tools:text="1 %"
+                tools:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/card_company_level_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin3"
+                android:text="@string/level_title"
+                android:textColor="@{company.textColor}"
+                android:textSize="@dimen/text4"
+                app:layout_constraintBottom_toBottomOf="@+id/card_company_cashback_title_tv"
+                app:layout_constraintStart_toEndOf="@+id/card_company_cashback_title_tv"
+                app:layout_constraintTop_toTopOf="@+id/card_company_cashback_title_tv" />
+
+            <TextView
+                android:id="@+id/card_company_level_value_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{company.levelName}"
+                android:textColor="@{company.highlightTextColor}"
+                android:textSize="@dimen/text3"
+                app:layout_constraintBottom_toBottomOf="@+id/card_company_cashback_value_tv"
+                app:layout_constraintEnd_toEndOf="@+id/card_company_logo_iv"
+                app:layout_constraintStart_toStartOf="@+id/card_company_level_title_tv"
+                app:layout_constraintTop_toTopOf="@+id/card_company_cashback_value_tv"
+                tools:text="Базовый уровень тест"
+                tools:textColor="@color/black" />
+
+            <View
+                android:id="@+id/card_bottom_separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="@dimen/margin1"
+                android:layout_marginTop="@dimen/margin2"
+                android:background="@color/lightGray"
+                app:layout_constraintTop_toBottomOf="@+id/card_company_level_value_tv" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/card_company_eye_iv"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:layout_marginTop="@dimen/margin1"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/icon_eye_white"
+                android:tint="@{company.mainColor}"
+                app:layout_constraintStart_toStartOf="@+id/card_company_cashback_value_tv"
+                app:layout_constraintTop_toBottomOf="@+id/card_bottom_separator"
+                tools:tint="@color/blue" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/card_company_trash_iv"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:layout_marginStart="@dimen/margin3"
+                android:layout_marginTop="@dimen/margin1"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/icon_trash_white"
+                android:tint="@{company.accentColor}"
+                app:layout_constraintStart_toEndOf="@+id/card_company_eye_iv"
+                app:layout_constraintTop_toBottomOf="@+id/card_bottom_separator"
+                tools:tint="#FFD32F2F" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/card_company_more_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin3"
+                android:layout_marginTop="@dimen/margin2"
+                android:layout_marginEnd="@dimen/margin1"
+                android:layout_marginBottom="@dimen/margin1"
+                android:background="@drawable/button_ripple"
+                android:backgroundTint="@{company.backgroundColor}"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true"
+                android:text="@string/more_text_button"
+                android:textAllCaps="false"
+                android:textColor="@{company.mainColor}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/card_company_trash_iv"
+                app:layout_constraintTop_toBottomOf="@+id/card_bottom_separator"
+                tools:backgroundTint="@color/lightGray"
+                tools:textColor="@color/blue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

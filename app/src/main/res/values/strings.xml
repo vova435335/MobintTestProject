@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">MobintTestProject</string>
+
+    <string name="mark_title">баллов</string>
+    <string name="cashback_title">Кешбэк</string>
+    <string name="level_title">Уровень</string>
+    <string name="more_text_button">Подробнее</string>
+    <string name="load_companies_text">Подгрузка компаний</string>
+
+    <string name="eye_button_name">Eye</string>
+    <string name="trash_button_name">Trash</string>
+    <string name="more_button_name">More</string>
+
+    <string name="company_info_dialog_message">Нажата кнопка %s, Id компании: %s</string>
+    <string name="company_info_dialog_close_text">Закрыть</string>
+
+    <string name="error_message_401">ошибка авторизации</string>
+    <string name="error_message_500">все упало</string>
+
+    <string name="card_management_toolbar_title">Управление картами</string>
 </resources>
