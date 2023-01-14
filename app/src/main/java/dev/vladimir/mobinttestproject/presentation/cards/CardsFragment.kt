@@ -22,6 +22,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
     private lateinit var binding: FragmentCardsBinding
 
     private lateinit var cardsAdapter: CardsAdapter
+    private lateinit var cardsFooterAdapter: DefaultLoadStateAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,19 +40,32 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
             onMoreClick = { showCompanyInfo(getString(R.string.more_button_name), it) }
         )
 
-        val footerAdapter = DefaultLoadStateAdapter()
+        cardsFooterAdapter = DefaultLoadStateAdapter(viewModel::handleError)
 
         binding.cardsRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = cardsAdapter.withLoadStateFooter(footerAdapter)
+            adapter = cardsAdapter.withLoadStateFooter(cardsFooterAdapter)
         }
 
         listenLoadState()
     }
 
     private fun listenLoadState() {
-        cardsAdapter.addLoadStateListener {
-            binding.loadStateView.loaderContainerLl.isVisible = it.refresh is LoadState.Loading
+        cardsAdapter.loadStateFlow.observe(this){
+            with(binding) {
+                when (it.refresh) {
+                    is LoadState.Loading -> {
+                        loadStateView.loaderContainerLl.isVisible = true
+                    }
+                    is LoadState.Error -> {
+                        loadStateView.loaderContainerLl.isVisible = false
+                        viewModel.handleError((it.refresh as LoadState.Error).error)
+                    }
+                    is LoadState.NotLoading -> {
+                        loadStateView.loaderContainerLl.isVisible = false
+                    }
+                }
+            }
         }
     }
 
@@ -59,11 +73,21 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         viewModel.companiesState.observe(this) {
             cardsAdapter.submitData(lifecycle, it)
         }
+        viewModel.errorEvent.observe(this) {
+            showErrorDialog(it)
+        }
     }
 
     private fun showCompanyInfo(buttonName: String, companyId: String) {
         AlertDialog.Builder(requireContext())
             .setMessage(getString(R.string.company_info_dialog_message, buttonName, companyId))
+            .setPositiveButton(R.string.company_info_dialog_close_text, null)
+            .show()
+    }
+
+    private fun showErrorDialog(message: String) {
+        AlertDialog.Builder(requireContext())
+            .setMessage(message)
             .setPositiveButton(R.string.company_info_dialog_close_text, null)
             .show()
     }

@@ -8,10 +8,13 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.vladimir.mobinttestproject.databinding.ViewLoaderBinding
 
-class DefaultLoadStateAdapter : LoadStateAdapter<DefaultLoadStateAdapter.Holder>() {
+class DefaultLoadStateAdapter(
+    private val onError: (throwable: Throwable) -> Unit
+) : LoadStateAdapter<DefaultLoadStateAdapter.Holder>() {
 
     override fun onBindViewHolder(holder: Holder, loadState: LoadState) {
         holder.binding.loaderContainerLl.isVisible = loadState is LoadState.Loading
+        if (loadState is LoadState.Error) onError(loadState.error)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): Holder {

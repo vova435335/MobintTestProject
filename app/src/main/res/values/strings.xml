@@ -13,4 +13,7 @@
 
     <string name="company_info_dialog_message">Нажата кнопка %s, Id компании: %s</string>
     <string name="company_info_dialog_close_text">Закрыть</string>
+
+    <string name="error_message_401">ошибка авторизации</string>
+    <string name="error_message_500">все упало</string>
 </resources>
