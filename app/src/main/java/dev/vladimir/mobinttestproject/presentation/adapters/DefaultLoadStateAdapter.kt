@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.vladimir.mobinttestproject.databinding.ViewLoaderBinding
 
 class DefaultLoadStateAdapter(
-    private val onError: (throwable: Throwable) -> Unit
+    private val onError: (throwable: Throwable) -> Unit,
 ) : LoadStateAdapter<DefaultLoadStateAdapter.Holder>() {
 
     override fun onBindViewHolder(holder: Holder, loadState: LoadState) {

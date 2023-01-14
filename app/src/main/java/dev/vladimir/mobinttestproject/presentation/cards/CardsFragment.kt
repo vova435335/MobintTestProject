@@ -89,6 +89,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         AlertDialog.Builder(requireContext())
             .setMessage(message)
             .setPositiveButton(R.string.company_info_dialog_close_text, null)
+            .setOnDismissListener { cardsAdapter.retry() }
             .show()
     }
 }
