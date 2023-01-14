@@ -2,7 +2,7 @@ package dev.vladimir.mobinttestproject.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import androidx.core.view.isGone
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +13,8 @@ class DefaultLoadStateAdapter(
 ) : LoadStateAdapter<DefaultLoadStateAdapter.Holder>() {
 
     override fun onBindViewHolder(holder: Holder, loadState: LoadState) {
-        holder.binding.loaderContainerLl.isVisible = loadState is LoadState.Loading
+        holder.binding.loaderPb.isGone = loadState !is LoadState.Loading
+        holder.binding.loaderMessageTv.isGone = loadState !is LoadState.Loading
         if (loadState is LoadState.Error) onError(loadState.error)
     }
 

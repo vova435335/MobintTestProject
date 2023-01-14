@@ -7,6 +7,7 @@
     android:gravity="center_horizontal">
 
     <ProgressBar
+        android:id="@+id/loader_pb"
         android:layout_marginTop="@dimen/margin1"
         android:layout_width="@dimen/sizePreloader"
         android:layout_height="@dimen/sizePreloader"
@@ -14,6 +15,7 @@
         android:indeterminateTintMode="src_atop" />
     
     <TextView
+        android:id="@+id/loader_message_tv"
         android:layout_marginTop="@dimen/margin2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
