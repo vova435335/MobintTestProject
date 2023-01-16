@@ -23,8 +23,8 @@ class CardsPagingSource(
 
             return LoadResult.Page(
                 data = companies,
-                prevKey = if (offset == 0) null else offset - 1,
-                nextKey = if (companies.size < params.loadSize) null else offset + 1
+                prevKey = if (offset == 0) null else offset - params.loadSize,
+                nextKey = if (companies.isEmpty()) null else offset + params.loadSize
             )
         } catch (e: Exception) {
             LoadResult.Error(throwable = e)
